@@ -13,6 +13,7 @@ date_dict = {'January': '01',
              'November': '11',
              'December': '12'}
 
+
 def process_director_actor(s):
     if not s:
         return '', ''
@@ -81,20 +82,3 @@ def process_agree(l):
 def auto_fill(l, length):
     return l + [l[-1] for _ in range(length-len(l))]
 
-
-def load_stopwords():
-    # Used to load stop word list from local file
-    print('...Stopwords loading finished...')
-    fs = open('stop_words.txt', encoding='utf_8_sig')
-    sw = [line.strip() for line in fs]
-    fs.close()
-    return sw
-
-
-def del_punc(t: str) -> str:
-    # Used to delete punctuations in text, including special characters e.g. \n, \r...
-    t = t.lower()
-    punc = list("~!@#$%^&*()_+`{}|\[\]\:\";\-\\\='<>?,./") + ['\n', '\r'] + list('0123456789')
-    for s in punc:
-        t = t.replace(s, ' ')
-    return t

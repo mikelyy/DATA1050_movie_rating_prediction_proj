@@ -18,15 +18,15 @@ scores = [int(x[0]) for x in reviews]  # Extracting the scores as training label
 text = [x[1] for x in reviews]
 pr = ProcessR(text)
 
-x_train, x_test, y_train, y_test = train_test_split(np.array(pr.doc_vs), np.array(scores).astype(int))
-lbl = pp.LabelEncoder()
-y_train_xgb = lbl.fit_transform(y_train)
-y_test_xgb = lbl.fit_transform(y_test)
+x_train, x_test, y_train, y_test = train_test_split(np.array(pr.doc_vs), np.array(scores).astype(float), test_size=0.1)
+# lbl = pp.LabelEncoder()
+# y_train_xgb = lbl.fit_transform(y_train)
+# y_test_xgb = lbl.fit_transform(y_test)
 dtrain = xgb.DMatrix(x_train, y_train)
 dtest = xgb.DMatrix(x_test, y_test)
 param = {'max_depth': 60, 'eta': 0.03, 'objective': 'reg:squarederror',
          'booster': 'gbtree'}
-evallist = [(dtest, 'eval'), (dtrain, 'train')]
+evallist = [(dtrain, 'train')]
 model = xgb.train(param, dtrain, 300, evallist)  # Train a xgboost model (regression task)
 
 

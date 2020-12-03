@@ -47,5 +47,8 @@ votes:
 gross:
 #main > div > div.lister.list.detail.sub-list > div > div:nth-child(2) > div.lister-item-content > p.sort-num_votes-visible > span:nth-child(5)
 
+#main > section > div.lister > div.lister-list > div:nth-child(1) > div.review-container > div.lister-item-content
+#main > section > div.lister > div.lister-list > div:nth-child(1) > div.review-container > div.lister-item-content
+
 
 #main > section > div.lister > div.lister-list > div:nth-child(1) > div.review-container > div.lister-item-content
