@@ -212,7 +212,7 @@ class WebUpdater(object):
         return genres_link
 
     def get_all_popular_movie_detail(self,
-                                     page_limit=1) -> dict:
+                                     page_limit=50) -> dict:
         pop_m = {}
         for link, name in zip(self.genres_link, self.genres_name):
             print("Updating Popular Movie Database {} out of {}".format(name, self.gl_len))
