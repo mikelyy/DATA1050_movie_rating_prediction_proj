@@ -1,41 +1,34 @@
-import logging
 import pymongo
 import pandas as pds
 import expiringdict
-import utils
+import pickle
+import pandas as pd
+import numpy as np
 
-client = pymongo.MongoClient()
-logger = logging.Logger(__name__)
-utils.setup_logger(logger, 'db.log')  # database.log
-RESULT_CACHE_EXPIRATION = 15  # second
+connection_url = 'mongodb+srv://movie:moviedata1050@movie.4icao.mongodb.net/<dbname>?retryWrites=true&w=majority'
+client = pymongo.MongoClient(connection_url)
+RESULT_CACHE_EXPIRATION = 15  # seconds
 
 
 def upsert_movie(df):
     """
     Update MongoDB database `movies` and collection `pop_movies` with the given `DataFrame`.
     """
-    # this function needs to be used in update_data function in web scraping data from online website
 
     db = client.get_database("movies")
     collection = db.get_collection("pop_movies")
-    update_count = 0
+    db.pop_movies.remove({})
     for record in df.to_dict('records'):
         result = collection.replace_one(
-            filter={'datetime': record['datetime']},  # locate the document if exists
+            filter=record,  # locate the document if exists
             replacement=record,  # latest document
             upsert=True)  # update if exists, insert if not
-        if result.matched_count > 0:
-            update_count += 1
-    logger.info("rows={}, update={}, ".format(df.shape[0], update_count) +
-                "insert={}".format(df.shape[0] - update_count))
 
 
 def fetch_all_movie():
-    # this function is to fetch data
     db = client.get_database("movies")
     collection = db.get_collection("pop_movies")
     ret = list(collection.find())
-    # logger.info(str(len(ret)) + ' documents read from the db')
     return ret
 
 
@@ -68,7 +61,24 @@ def fetch_all_movies_as_df(allow_cached=False):
     return ret
 
 
-if __name__ == '__main__':
-    print(fetch_all_movies_as_df())
+def load_obj(name):
+    with open(name + '.pkl', 'rb') as f:
+        return pickle.load(f)
 
 
+def plk_to_dataframe(input_file):
+    df_1 = pd.DataFrame(input_file)
+    df_dataframe1 = np.transpose(df_1)
+    df_dataframe1.columns = ['title', 'year', 'content_rating', 'length', 'genres', 'score', 'metascore',
+                             'vote_numbers',
+                             'gross', 'director', 'actors', 'genre_overall']
+    df_dataframe1['year'] = df_dataframe1['year'].map(lambda x: ''.join([i for i in x if i.isdigit()]))
+    df_dataframe1['length'] = [df_dataframe1['length'][i][:-3] for i in range(len(df_dataframe1['length']))]
+    df_dataframe1['gross'] = [df_dataframe1['gross'][i][1:-1] for i in range(len(df_dataframe1['gross']))]
+    df_dataframe1['content_rating'].replace(to_replace='', value='Not Rated', inplace=True)
+    return df_dataframe1
+
+
+def transform(df):
+    df_update = df.reset_index().rename(columns={'index': 'movie_id'})
+    return df_update

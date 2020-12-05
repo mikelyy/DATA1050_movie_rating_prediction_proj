@@ -32,7 +32,6 @@ df1 = pd.read_json('https://raw.githubusercontent.com/YueWangpl/DATA1050_movie_r
 df2 = df1[~(df1['year'] < 2015)]
 
 
-
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content')
