@@ -3,9 +3,9 @@
 The project was developed by Bangxi Xiao, Yuyang Li and Yue Wang.
 The contributions they made are listed bellow:
 
-Database design and test, data cleaning and reformations: Yuyang Li.
+Database design and test, data cleaning and reformations as well as EDA: Yuyang Li.
 
-Data visualizations, website design and data cleaning: Yue Wang.
+Data visualizations, website design and data cleaning as well as EDA: Yue Wang.
 
 AWS service implementations, language model design and implementations as well as movie data acquisition: Bangxi Xiao.
 
