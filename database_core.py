@@ -1,3 +1,4 @@
+# Code contributed and debugged by Yuyang Li
 import pymongo
 import pandas as pds
 import expiringdict
@@ -17,10 +18,9 @@ def upsert_movie(df):
 
     db = client.get_database("movies")
     collection = db.get_collection("pop_movies")
-    db.pop_movies.remove({})
     for record in df.to_dict('records'):
         result = collection.replace_one(
-            filter=record,  # locate the document if exists
+            filter={'movie_id': record['movie_id']},  # locate the document if exists
             replacement=record,  # latest document
             upsert=True)  # update if exists, insert if not
 

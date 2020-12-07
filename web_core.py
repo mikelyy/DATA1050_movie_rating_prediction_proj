@@ -1,3 +1,4 @@
+# Code contributed and debugged by Bangxi Xiao
 import cfscrape
 import time
 import json
