@@ -15,4 +15,8 @@ To test the service, run "app.py" locally.
 
 The link to our developed website is: http://mysfits-nlb-91b25e1f5afaf41b.elb.us-east-2.amazonaws.com/ (shortened by bitly.com is: https://bit.ly/3qJt1BM).
 
+The link to presentation slide is: https://docs.google.com/presentation/d/14rVUIYy7192J5RJMqhZikAc6Cijk7UL-aJ43t2tpVcE/edit#slide=id.p
+
+The link
+
 Contact info: bangxi_xiao@brown.edu, yuyang_li1@brown.edu, yue_wang2@brown.edu.
