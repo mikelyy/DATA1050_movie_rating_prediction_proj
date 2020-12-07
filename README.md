@@ -11,4 +11,8 @@ AWS service implementations, language model design and implementations as well a
 
 The environment setup requirements are in the file "requirements.txt".
 
-Contact info: bangxi_xiao@brown.edu, yuyang_li1@brown.edu, yue_wang2@brown.edu
+To test the service, run "app.py" locally.
+
+The link to our developed website is: http://mysfits-nlb-91b25e1f5afaf41b.elb.us-east-2.amazonaws.com/ (shortened by bitly.com is: https://bit.ly/3qJt1BM).
+
+Contact info: bangxi_xiao@brown.edu, yuyang_li1@brown.edu, yue_wang2@brown.edu.
